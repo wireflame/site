@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<meta name="HandheldFriendly" content="true"/>
+		<title>WireFlame</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/jquery.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/modalPopup.jquery.js"></script>
+		<script src="js/kinetic-v3.9.7.js"></script>
+		<script>
+			
+			var selectedBox = "null";
+			var element = 0;
+			var imageN = 0;
+			window.onload = function() {
+
+				var stage = new Kinetic.Stage({
+					container : "container",
+					width : 600,
+					height : 800
+				});
+				var layer = new Kinetic.Layer();	
+				
+				var intermediarGroup = new Kinetic.Group({
+						x : 0,
+						y : 0,
+						draggable : true
+					});
+					layer.add(intermediarGroup);
+					
+				var darthVaderGroup = new Kinetic.Group({
+						x : 0,
+						y : 0,
+						draggable : true
+					});
+					layer.add(darthVaderGroup);	
+				
+				stage.add(layer);
+
+				// add button event bindings
+
+				document.getElementById("toBottom").addEventListener("click", function() {
+					selectedBox.moveToBottom();
+					layer.draw();
+				}, false);
+
+				document.getElementById("toTop").addEventListener("click", function() {
+					selectedBox.moveToTop();
+					layer.draw();
+				}, false);
+
+				document.getElementById("up").addEventListener("click", function() {
+					selectedBox.moveUp();
+					layer.draw();
+				}, false);
+
+				document.getElementById("resize").addEventListener("click", function() {
+					darthVaderGroup.add(selectedBox);
+					addAnchor(darthVaderGroup, selectedBox.getX(), selectedBox.getY(), "topLeft");
+					addAnchor(darthVaderGroup, selectedBox.getX() + selectedBox.getWidth(), selectedBox.getY(), "topRight");
+					addAnchor(darthVaderGroup, selectedBox.getX() + selectedBox.getWidth(), selectedBox.getY() + selectedBox.getHeight(), "bottomRight");
+					addAnchor(darthVaderGroup, selectedBox.getX(), selectedBox.getY() + selectedBox.getHeight(), "bottomLeft");
+
+					darthVaderGroup.on("dragstart", function() {
+						this.moveToTop();
+					});
+					layer.draw();
+				}, false);
+
+				document.getElementById("noresize").addEventListener("click", function() {
+					//darthVaderGroup.hide();
+					layer.remove(darthVaderGroup);
+					selectedBox.moveTo(intermediarGroup);
+					
+					layer.draw();
+				}, false);
+
+				document.getElementById("down").addEventListener("click", function() {
+					selectedBox.moveDown();
+					layer.draw();
+				}, false);
+
+				document.getElementById("zIndex").addEventListener("click", function() {
+					selectedBox.setZIndex(3);
+					layer.draw();
+				}, false);
+
+				document.getElementById("fig1").addEventListener("click", function() {
+					addFigure(layer, stage, element);
+					stage.add(layer);
+					element++;
+				}, false);
+
+				document.getElementById("addImg").addEventListener("click", function() {
+					addImage(layer, stage, imageN);
+					layer.draw();
+					stage.add(layer);
+					
+					imageN++;
+				}, false);
+			};
+			function update(group, activeAnchor) {
+				var topLeft = group.get(".topLeft")[0];
+				var topRight = group.get(".topRight")[0];
+				var bottomRight = group.get(".bottomRight")[0];
+				var bottomLeft = group.get(".bottomLeft")[0];
+				var image = group.get(".image")[0];
+
+				// update anchor positions
+				switch (activeAnchor.getName()) {
+					case "topLeft":
+						topRight.attrs.y = activeAnchor.attrs.y;
+						bottomLeft.attrs.x = activeAnchor.attrs.x;
+						break;
+					case "topRight":
+						topLeft.attrs.y = activeAnchor.attrs.y;
+						bottomRight.attrs.x = activeAnchor.attrs.x;
+						break;
+					case "bottomRight":
+						bottomLeft.attrs.y = activeAnchor.attrs.y;
+						topRight.attrs.x = activeAnchor.attrs.x;
+						break;
+					case "bottomLeft":
+						bottomRight.attrs.y = activeAnchor.attrs.y;
+						topLeft.attrs.x = activeAnchor.attrs.x;
+						break;
+				}
+
+				image.setPosition(topLeft.attrs.x, topLeft.attrs.y);
+				image.setSize(topRight.attrs.x - topLeft.attrs.x, bottomLeft.attrs.y - topLeft.attrs.y);
+			}
+
+			function addAnchor(group, x, y, name) {
+				var stage = group.getStage();
+				var layer = group.getLayer();
+
+				var anchor = new Kinetic.Circle({
+					x : x,
+					y : y,
+					stroke : "#666",
+					fill : "#ddd",
+					strokeWidth : 2,
+					radius : 8,
+					name : name,
+					draggable : true
+				});
+
+				anchor.on("dragmove", function() {
+					update(group, this);
+					layer.draw();
+				});
+				anchor.on("mousedown touchstart", function() {
+					group.draggable(false);
+					this.moveToTop();
+				});
+				anchor.on("dragend", function() {
+					group.draggable(true);
+					layer.draw();
+				});
+				// add hover styling
+				anchor.on("mouseover", function() {
+					var layer = this.getLayer();
+					document.body.style.cursor = "pointer";
+					this.setStrokeWidth(4);
+					layer.draw();
+				});
+				anchor.on("mouseout", function() {
+					var layer = this.getLayer();
+					document.body.style.cursor = "default";
+					this.setStrokeWidth(2);
+					layer.draw();
+				});
+
+				group.add(anchor);
+			}
+
+			function addImage(layer, stage, nume) {
+
+				var imageObj = new Image();
+				(function() {
+					var image = new Kinetic.Image({
+						x : stage.getWidth() / 2 - 53,
+						y : stage.getHeight() / 2 - 59,
+						image : imageObj,
+						width : 106,
+						height : 118,
+						draggable : true,
+						name : "image"
+					});
+
+					image.on("mouseover", function() {
+						document.body.style.cursor = "pointer";
+
+					});
+					image.on("click", function() {
+						selectedBox = image;
+					});
+
+					image.on("dragstart", function() {
+						selectedBox = image;
+					});
+
+					image.on("mouseout", function() {
+						document.body.style.cursor = "default";
+					});
+
+					layer.add(image);
+				})();
+				imageObj.src = "images/yoda.jpg";
+				
+
+			}
+
+			function addFigure(layer, stage, nume) {
+
+				var offsetX = 0;
+				var offsetY = 0;
+				var color = "yellow";
+				// anonymous function to induce scope
+				(function() {
+					var i = 0;
+					var box = new Kinetic.Rect({
+						x : i * 30 + 210,
+						y : i * 18 + 40,
+						width : 100,
+						height : 50,
+						fill : color,
+						stroke : "black",
+						strokeWidth : 4,
+						draggable : true,
+						name : nume
+					});
+
+					box.on("mouseover", function() {
+						document.body.style.cursor = "pointer";
+
+					});
+					box.on("click", function() {
+						selectedBox = box;
+					});
+
+					box.on("dragstart", function() {
+						selectedBox = box;
+					});
+
+					box.on("mouseout", function() {
+						document.body.style.cursor = "default";
+					});
+
+					layer.add(box);
+				})();
+
+			}
+		</script>
+	</head>
+	<body onmousedown="return false;">
+		<div id="carousel">
+			<div class="modal-popup">
+				<div class="modal-overlay"></div>
+				<div class="modal-container">
+					<div class="modal-bg">
+						<div class="modal-close">c</div>
+						<div class="carousel-category">Controls</div>
+						<div class="carousel-category-container">
+							<div id="close-button" class="c-controls"></div>
+							<div id="slider-button" class="c-controls">Slider</div>
+							<div id="raiting-button" class="c-controls">Raiting</div>
+						</div>
+						<div class="carousel-category">Forms</div>
+						<div class="carousel-category-container">
+							<div id="text-input-box" class="c-controls">IT</div>
+							<div id="button-box" class="c-controls">B</div>
+							<div id="dropdown-box" class="c-controls">D</div>
+							<div id="search-box" class="c-controls">S</div>
+							<div id="textarea-input-box" class="c-controls">TA</div>
+							<div id="checkbox-button" class="c-controls">C</div>
+							<div id="radio-button" class="c-controls">R</div>
+						</div>
+						<div class="carousel-category">Graphs</div>
+						<div class="carousel-category-container">
+							<div id="bar-graph" class="c-controls">BG</div>
+							<div id="pie-chart" class="c-controls">PC</div>
+							<div id="line-graph" class="c-controls">LG</div>
+						</div>
+						<div class="carousel-category">Icons</div>
+						<div class="carousel-category-container">
+							<div id="shopping-cart" class="c-controls">SC</div>
+							<div id="plus-button" class="c-controls">PB</div>
+							<div id="minus-button" class="c-controls">MB</div>
+							<div id="edit-button" class="c-controls">EB</div>
+							<div id="home-button" class="c-controls">HB</div>
+						</div>
+						<div class="carousel-category">Layout</div>
+						<div class="carousel-category-container">
+							<div id="vertical-line" class="c-controls">VL</div>
+							<div id="horizontal-line" class="c-controls">HL</div>
+							<div id="grid-layout" class="c-controls">GL</div>
+							<div id="circle-layout" class="c-controls">CL</div>
+							<div id="rectangle-layout" class="c-controls">RL</div>
+						</div>
+						<div class="carousel-category">Media</div>
+						<div class="carousel-category-container">
+							<div id="profile-picture" class="c-controls"></div>
+							<div id="video-player" class="c-controls"></div>
+							<div id="microphone" class="c-controls"></div>
+							<div id="map-layout" class="c-controls"></div>
+						</div>
+						<div class="carousel-category">Navigation</div>
+						<div class="carousel-category-container">
+							<div id="vertical-link-list" class="c-controls"></div>
+							<div id="horizontal-link-list" class="c-controls"></div>
+							<div id="horizontal-list" class="c-controls"></div>
+							<div id="button-bar" class="c-controls"></div>
+							<div id="tab-container" class="c-controls"></div>
+							<div id="pagination" class="c-controls"></div>
+							<div id="next-button" class="c-controls"></div>
+							<div id="previous-button" class="c-controls"></div>
+						</div>
+						<div class="carousel-category">Text</div>
+						<div class="carousel-category-container">
+							<div id="text-layout" class="c-controls"></div>
+							<div id="link-button" class="c-controls"></div>
+							<div id="copyright" class="c-controls"></div>
+							<div id="banner-ad" class="c-controls"></div>
+							<div id="captcha" class="c-controls"></div>
+							<div id="tag-cloud" class="c-controls"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="addElements"><span>Adauga</span></div>
+		<div id="container"></div>
+		<div id="buttons">
+			<button id="toTop">
+				Move box to top
+			</button>
+			<button id="toBottom">
+				Move box to bottom
+			</button>
+			<button id="up">
+				Move box up
+			</button>
+			<button id="down">
+				Move box down
+			</button>
+			<button id="zIndex">
+				Set box zIndex to 3
+			</button>
+			<button id="fig1">
+				Adauga figura
+			</button>
+			<button id="addImg">
+				Adauga Imagine
+			</button>
+			<button id="resize">
+				Resize
+			</button>
+			<button id="noresize">
+				Remove Resize
+			</button>
+		</div>
+	</body>
+</html>
