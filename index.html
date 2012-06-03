@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-		<meta name="HandheldFriendly" content="true"/>
+		<meta name="HandheldFriendly" content="true" />
 		<title>WireFlame</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="js/jquery.js"></script>
@@ -97,8 +97,97 @@
 					addImage(layer, stage, imageN);
 					layer.draw();
 					stage.add(layer);
-					
 					imageN++;
+				}, false);
+				
+				document.getElementById("close-button").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("slider-button").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("raiting-button").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("text-input-box").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("button-box").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("dropdown-box").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("search-box").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("textarea-input-box").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("checkbox-button").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
+				}, false);
+				
+				document.getElementById("radio-button").addEventListener("click", function() {
+					var ele = document.getElementById("carousel");
+					ele.style.display = "none"; 
+				    addImage(layer, stage, imageN);
+				    layer.draw();
+				    stage.add(layer);
+				    imageN++;
 				}, false);
 			};
 			function update(group, activeAnchor) {
@@ -331,36 +420,20 @@
 				</div>
 			</div>
 		</div>
-		<div id="addElements"><span>Adauga</span></div>
+		<div id="addElements">
+			<span>Adauga</span>
+		</div>
 		<div id="container"></div>
 		<div id="buttons">
-			<button id="toTop">
-				Move box to top
-			</button>
-			<button id="toBottom">
-				Move box to bottom
-			</button>
-			<button id="up">
-				Move box up
-			</button>
-			<button id="down">
-				Move box down
-			</button>
-			<button id="zIndex">
-				Set box zIndex to 3
-			</button>
-			<button id="fig1">
-				Adauga figura
-			</button>
-			<button id="addImg">
-				Adauga Imagine
-			</button>
-			<button id="resize">
-				Resize
-			</button>
-			<button id="noresize">
-				Remove Resize
-			</button>
+			<button id="toTop"> Move box to top </button>
+			<button id="toBottom"> Move box to bottom </button>
+			<button id="up"> Move box up </button>
+			<button id="down"> Move box down </button>
+			<button id="zIndex"> Set box zIndex to 3 </button>
+			<button id="fig1"> Adauga figura </button>
+			<button id="addImg"> Adauga Imagine </button>
+			<button id="resize"> Resize </button>
+			<button id="noresize"> Remove Resize </button>
 		</div>
 	</body>
 </html>

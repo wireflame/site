@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="13.2">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="wireFlame.xpr">
+        <folder path="css/"/>
+        <folder path="images/"/>
+        <folder path="js/"/>
+        <file name="index.html"/>
+        <file name="index1.html"/>
+    </projectTree>
+</project>

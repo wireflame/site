@@ -1,0 +1,140 @@
+* {
+ -webkit-text-size-adjust:none;
+}
+body{
+    margin:0;
+    padding:0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color:#444444;
+}
+canvas{
+    border:1px solid #9C9898;
+}
+#container{
+    float:left;
+}
+.slide{
+    width:100%;
+    height:100%;
+    background-color:#837;
+    border-right:2px solid #fff;
+}
+#buttons{
+    position:relative;
+    float:left;
+    left:10px;
+    top:0px;
+}
+#buttons button{
+    margin-top:10px;
+    display:block;
+}
+
+#addElements{
+    background-color:#80CDF4;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+}
+#carousel
+{
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	position:absolute;
+	z-index:500;
+	width: 100%;
+	height: 100%;
+	
+}
+.modal-popup
+{
+	background-repeat:repeat;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	position:absolute;
+	z-index:999;
+	
+}
+.modal-overlay{
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	position:absolute;
+	z-index:-1;
+	width:100%;
+	height:100%;
+	
+}
+.modal-container 
+{
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:1000;
+	
+}
+.modal-bg
+{
+	width:100%;
+	height:100%;
+	background-color:#fdfdfd;
+	position:relative;
+}
+.modal-close
+{
+	float:right;
+	position:relative;
+	cursor:pointer;
+	margin:3px 3px 0 0;
+}
+.carousel-category{
+    font-size:20px;
+	font-weight:500;
+	color:#484c55;
+	text-shadow:0px 2px 0px rgba(241,243,249,0.5);
+    width:100%;
+    border-bottom:solid 1px #ededed;
+	-webkit-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.04);
+	-moz-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.04);
+	box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.04);
+	background-color:#fdfdfd;
+	margin: 0 0 15px 15px;
+	clear:both;
+}
+.carousel-category-container{
+    width: 100%;
+    height: 50px;
+    margin: 0 0 15px 15px;
+}
+.c-controls{
+    display:inline;
+    position: relative;
+    float: left;
+    margin: 5px 10px 5px 0px;
+    border:1px solid #d9d9d9;
+    width: 32px;
+    height: 32px;
+}
+.c-controls:last-child{
+    margin: 5px 0px 5px 0px;
+}
+#close-button{
+    background-image:url(../images/controls/cross.png);
+}
+#slider-button{
+
+}
+#raiting-button{
+
+}
+#text-input-box{
+    
+}
+#button-box{
+
+}
