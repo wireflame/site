@@ -11,7 +11,8 @@ canvas{
     border:1px solid #9C9898;
 }
 #container{
-    float:left;
+    width: 100%;
+    height: 100%;
 }
 .slide{
     width:100%;
@@ -31,10 +32,95 @@ canvas{
 }
 
 #addElements{
-    background-color:#80CDF4;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    padding: 10px;
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 15px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/add.png);
+}
+
+#removeElement{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 71px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/minus.png);
+}
+#moveUp{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 127px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/up.png);
+}
+#moveDown{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 181px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/down.png);
+}
+#save{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 295px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/save.png);
+}
+#resize{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    margin: 0 0 0 7px;
+    padding: 0;
+    top: 239px;
+    left: 0;
+    z-index:499;
+    zoom: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);	
+	opacity: 0.75;
+	background-image: url(../images/controls/zoom.png);
 }
 #carousel
 {
@@ -105,6 +191,7 @@ canvas{
 	background-color:#fdfdfd;
 	margin: 0 0 15px 15px;
 	clear:both;
+	text-transform: uppercase;
 }
 .carousel-category-container{
     width: 100%;
@@ -117,14 +204,14 @@ canvas{
     float: left;
     margin: 5px 10px 5px 0px;
     border:1px solid #d9d9d9;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
 }
 .c-controls:last-child{
     margin: 5px 0px 5px 0px;
 }
 #close-button{
-    background-image:url(../images/controls/cross.png);
+    
 }
 #slider-button{
 
